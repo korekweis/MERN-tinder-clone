@@ -1,19 +1,28 @@
 import { SwipeableDrawer } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TinderCard from 'react-tinder-card';
 import "./TinderCards.css";
+import axios from './axios';
 
 function TinderCards() {
-    const [people, setPeople] = useState([
-        {
-            name:'Kim Namjoon',
-            url: 'https://pbs.twimg.com/media/ElkOEMNUYAAWNkB.jpg'
-        }, 
-        {
-            name:'Jeon Jungkook',
-            url: 'https://i.pinimg.com/736x/14/0b/de/140bde2b7f2a3eee3dd6babe5b95162a.jpg'
+    /** set empty array since it will be added soon on the DB */
+    const [people, setPeople] = useState([]);
+
+    //used for connecting frontend and backend 
+    useEffect(() => {
+        async function fetchData() { 
+            //get all tindercards from the database
+            const req = await axios.get('/tinder/card');
+
+            //then set people
+            setPeople(req.data);
         }
-    ]);
+
+        fetchData();
+
+    }, []) /** the empty brackets are for when the TinderCards.js loads
+    it will run this piece of code once. when there is [name] and when the variable 
+    name changes, it will refire the code - this is where useEffect will be used*/
 
     const swiped = (direction, nameToDelete) => {
         console.log("removing: " + nameToDelete);
@@ -35,7 +44,7 @@ function TinderCards() {
                         onSwipe={(dir) => swiped(dir, person.name)} //create a function called swiped 
                         onCardLeftScreen={() => outOfFrame(person.name)} //create function called outOfFrame
                         > 
-                        <div style={{backgroundImage: `url(${person.url})`}} className="card">
+                        <div style={{backgroundImage: `url(${person.imgUrl})`}} className="card">
                             <h3>{person.name}</h3>
                         </div>
                     </TinderCard>    
