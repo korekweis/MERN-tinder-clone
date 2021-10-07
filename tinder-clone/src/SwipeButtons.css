@@ -1,0 +1,35 @@
+.swipeButtons { 
+    position: fixed;
+    bottom: 5vh;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+/* class that gets added after swipeButtons for the IconButtons
+this selects all of the IconButtons */
+.swipeButtons .MuiIconButton-root {
+    background-color: white;
+    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
+    padding: 1.3vw !important;
+}
+
+.swipeButton_repeat {  
+    color: #f5b748 !important;
+}
+
+.swipeButton_left{
+    color: #ec5e6f !important;
+}
+
+.swipeButton_star{ 
+    color: #62b4f9 !important;
+}
+
+.swipeButton_right{ 
+    color: #76e2b3 !important;
+}
+
+.swipeButton_lightning{ 
+    color: #915dd1 !important;
+}
