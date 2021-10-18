@@ -6,12 +6,18 @@ import axios from './axios';
 
 function TinderCards() {
     /** set empty array since it will be added soon on the DB */
+    /** 
+     * people - variable name 
+     * setPeople - "setter" function for the variable
+     */
     const [people, setPeople] = useState([]);
 
     //used for connecting frontend and backend 
     useEffect(() => {
+        //async - it waits for a function
         async function fetchData() { 
             //get all tindercards from the database
+            //await - waiting for the response
             const req = await axios.get('/tinder/card');
 
             //then set people
